@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.*;
+import java.math.BigDecimal;
 
 class Window extends JFrame implements ActionListener
 {
@@ -76,13 +77,8 @@ class Window extends JFrame implements ActionListener
 
   public void displaySelector()
   {
-    //String[] moneyList = {"USD", "EUR", "POU"};
-    ArrayList<String> moneyList = new ArrayList<String>();
+    String[] moneyList = {"USD", "EUR", "POU"};
 
-    for (int i = 0; i < this.listCurrency.size(); i++)
-    {
-        moneyList.add(this.listCurrency.get(i).getName());
-    }
     this.boxPanel = new JPanel();
     this.boxPanel.setLayout(new GridLayout(1,3));
 
@@ -125,7 +121,7 @@ class Window extends JFrame implements ActionListener
   {
     String value = e.getActionCommand();
     String snb, ssrc, sdest;
-    Double dnb;
+    BigDecimal dnb;
     Currency src = new Currency();
     Currency dest = new Currency();
 
@@ -135,24 +131,24 @@ class Window extends JFrame implements ActionListener
       this.label.setText("0");
       break;
       case "Convert":
-        snb = this.label.getText();
-        dnb = Double.parseDouble(snb);
-        ssrc = (String)money1.getSelectedItem();
-        sdest = (String)money2.getSelectedItem();
-        for (int i = 0; i < listCurrency.size(); i++) {
-            if (ssrc == listCurrency.get(i).getName())
-                src = listCurrency.get(i);
-            else if (sdest == listCurrency.get(i).getName())
-                dest = listCurrency.get(i);
-        }
-        System.out.println(dnb.getClass().getName());
-        System.out.println(src.getClass().getName());
-        System.out.println(dest.getClass().getName());
+      snb = this.label.getText();
+      dnb = new BigDecimal(snb);
+      ssrc = (String)money1.getSelectedItem();
+      sdest = (String)money2.getSelectedItem();
+      for (int i = 0; i < listCurrency.size(); i++) {
+        if (ssrc == listCurrency.get(i).getName())
+        src = listCurrency.get(i);
+        else if (sdest == listCurrency.get(i).getName())
+        dest = listCurrency.get(i);
+      }
+      System.out.println(dnb.getClass().getName());
+      System.out.println(src.getClass().getName());
+      System.out.println(dest.getClass().getName());
       this.converteur = new Converter(dnb, src, dest);
       dnb = this.converteur.convert();
       System.out.println(dnb);
       snb = String.valueOf(dnb);
-       System.out.println(snb);
+      System.out.println(snb);
       this.label.setText(snb);
       break;
       default:

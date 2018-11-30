@@ -83,9 +83,16 @@ class Parser
       for (Object key : jsonObject.keySet())
       {
         String keyStr = (String)key;
-        Object keyvalue = jsonObject.get(keyStr);
-
-        this.rates.add(new Currency(keyStr, keyvalue));
+        if (jsonObject.get(keyStr) instanceof Double)
+        {
+          BigDecimal keyvalue = new BigDecimal((Double)jsonObject.get(keyStr));
+          this.rates.add(new Currency(keyStr, keyvalue));
+        }
+        else if (jsonObject.get(keyStr) instanceof Long)
+        {
+          BigDecimal keyvalue = new BigDecimal((Long)jsonObject.get(keyStr));
+          this.rates.add(new Currency(keyStr, keyvalue));
+        }
       }
     }
     catch (FileNotFoundException err)
@@ -100,7 +107,7 @@ class Parser
     {
       System.out.println(err.getMessage());
     }
-    
+
     return (this.rates);
   }
 }

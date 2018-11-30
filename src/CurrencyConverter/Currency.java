@@ -1,15 +1,17 @@
+import java.math.BigDecimal;
+
 class Currency
 {
   protected String name;
-  protected Object rate;
+  protected BigDecimal rate;
 
 Currency()
 {
     this.name = "USD";
-    this.rate = 1;
+    this.rate = new BigDecimal("1");
 }
 
-  Currency(String name, Object rate)
+  Currency(String name, BigDecimal rate)
   {
     this.name = name;
     this.rate = rate;
@@ -25,12 +27,12 @@ Currency()
     return this.name;
   }
 
-  public void setRate(Object rate)
+  public void setRate(BigDecimal rate)
   {
     this.rate = rate;
   }
 
-  public Object getRate()
+  public BigDecimal getRate()
   {
     return this.rate;
   }

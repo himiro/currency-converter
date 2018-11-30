@@ -1,22 +1,24 @@
+import java.math.BigDecimal;
+
 class Converter
 {
-  protected Object nb;
+  protected BigDecimal nb;
   protected Currency source;
   protected Currency dest;
 
-  Converter(Double nb, Currency source, Currency dest)
+  Converter(BigDecimal nb, Currency source, Currency dest)
   {
     this.nb = nb;
     this.source = source;
     this.dest = dest;
   }
 
-  public void setNb(Object nb)
+  public void setNb(BigDecimal nb)
   {
     this.nb = nb;
   }
 
-  public Object getNb()
+  public BigDecimal getNb()
   {
     return this.nb;
   }
@@ -41,22 +43,22 @@ class Converter
     return this.dest;
   }
 
-  public Double convert()
+  public BigDecimal convert()
   {
     // Basic conversion like 100$ to ?€
     if (this.source.getName().equals("USD"))
     {
-      return ((Double)this.nb * (Double)this.dest.getRate());
+      return (this.nb.multiply(this.dest.getRate()));
     }
     else if (this.dest.getName().equals("USD"))
     {
-      return ((Double)this.nb);
+      return ((BigDecimal)this.nb);
     }
     //Conversion from $ to £
     // Or conversion € -> £ = € -> $ -> £
     else
     {
-      return ((Double)this.nb / (Double)this.source.getRate() * (Double)this.dest.getRate());
+      return ((BigDecimal)this.nb.divide((BigDecimal)this.source.getRate().multiply((BigDecimal)this.dest.getRate())));
     }
   }
 }
