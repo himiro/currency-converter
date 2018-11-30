@@ -37,7 +37,7 @@ sourceSets.main.java.srcDirs = ['src']
 jar {
     manifest {
         attributes(
-            'Main-Class': 'Example'
+            'Main-Class': 'CurrencyConverter'
             )
         }
     }
