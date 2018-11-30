@@ -3,6 +3,12 @@ class Currency
   protected String name;
   protected Object rate;
 
+Currency()
+{
+    this.name = "USD";
+    this.rate = 1;
+}
+
   Currency(String name, Object rate)
   {
     this.name = name;

@@ -1,22 +1,22 @@
 class Converter
 {
-  protected double nb;
+  protected Object nb;
   protected Currency source;
   protected Currency dest;
 
-  Converter(double nb, Currency source, Currency dest)
+  Converter(Double nb, Currency source, Currency dest)
   {
     this.nb = nb;
     this.source = source;
     this.dest = dest;
   }
 
-  public void setNb(double nb)
+  public void setNb(Object nb)
   {
     this.nb = nb;
   }
 
-  public double getNb()
+  public Object getNb()
   {
     return this.nb;
   }
@@ -41,22 +41,22 @@ class Converter
     return this.dest;
   }
 
-  public double convert()
+  public Double convert()
   {
     // Basic conversion like 100$ to ?€
     if (this.source.getName().equals("USD"))
     {
-      return (this.nb * (Double)this.dest.getRate());
+      return ((Double)this.nb * (Double)this.dest.getRate());
     }
     else if (this.dest.getName().equals("USD"))
     {
-      return (this.nb);
+      return ((Double)this.nb);
     }
     //Conversion from $ to £
     // Or conversion € -> £ = € -> $ -> £
     else
     {
-      return (this.nb / (Double)this.source.getRate() * (Double)this.dest.getRate());
+      return ((Double)this.nb / (Double)this.source.getRate() * (Double)this.dest.getRate());
     }
   }
 }
