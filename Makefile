@@ -30,6 +30,6 @@ clean	:
 fclean:		clean
 					$(RM) $(NAME)
 
-re		:		clean all
+re		:		fclean all
 
 .PHONY : all package build run test deps clean re
