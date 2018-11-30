@@ -1,4 +1,4 @@
-NAME	=		CurrencyConverter.jar
+NAME	=		dist/currency-converter-1.0.0.jar
 
 GRADLE=		gradle -i
 
@@ -16,7 +16,7 @@ build	:
 					$(GRADLE) build
 
 run		:
-					$(GRADLE) run dist/CurrencyConverter.jar
+					$(GRADLE) run
 
 test	:
 					$(GRADLE) test

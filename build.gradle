@@ -33,6 +33,7 @@ tasks.withType(Jar){
   destinationDir = file("$rootDir/dist");
 }
 apply plugin: 'maven'
+apply plugin: 'application'
 
 sourceSets.main.java.srcDirs = ['src']
 
@@ -51,3 +52,4 @@ jar {
             )
         }
     }
+mainClassName = 'CurrencyConverter'
