@@ -53,7 +53,7 @@ class Converter
       return (this.nb);
     }
     //Conversion from $ to £
-    // € -> $ -> £
+    // Or conversion € -> £ = € -> $ -> £
     else
     {
       return (this.nb / this.source.getRate() * this.dest.getRate());

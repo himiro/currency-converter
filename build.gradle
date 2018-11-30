@@ -30,6 +30,7 @@ dependencies {
 }
 */
 apply plugin: 'java'
+apply plugin: 'maven'
 
 sourceSets.main.java.srcDirs = ['src']
 
@@ -41,7 +42,11 @@ jar {
     }
 }
 
-/*task run(dependsOn:JavaExec) << {
+/*dependencies{
+compile 'com.googlecode.json-simple:json-simple:1.1.1'
+}
+
+task run(dependsOn:JavaExec) << {
 javaexec
 {
 main = "-jar";
