@@ -16,7 +16,7 @@ build	:
 					$(GRADLE) build
 
 run		:
-					$(GRADLE) run
+					$(GRADLE) run dist/CurrencyConverter.jar
 
 test	:
 					$(GRADLE) test

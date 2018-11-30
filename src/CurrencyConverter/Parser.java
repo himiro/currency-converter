@@ -1,6 +1,9 @@
 import java.util.*;
-import java.io.File;
-import org.json.simple.*;
+import java.io.*;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 class Parser
 {
@@ -12,14 +15,14 @@ class Parser
   Parser()
   {
     this.fileName = "./rates.json";
-    //this.jsonObject = new JSONObject();
+    this.jsonObject = new JSONObject();
     //liveRates = new LiveRates();
   }
 
   Parser(String fileName)
   {
     this.fileName = fileName;
-    //this.jsonObject = new JSONObject();
+    this.jsonObject = new JSONObject();
     //liveRates = new LiveRates();
   }
 
@@ -43,7 +46,7 @@ class Parser
     return (this.fileName);
   }
 
-  /*public void setJsonObject(JSONObject jsonObject)
+  public void setJsonObject(JSONObject jsonObject)
   {
     this.jsonObject = jsonObject;
   }
@@ -51,7 +54,7 @@ class Parser
   public JSONObject getJsonObject()
   {
     return this.jsonObject;
-  }*/
+  }
 
   public void openFile() throws NoSuchFileException
   {
@@ -61,11 +64,30 @@ class Parser
     {
       throw new NoSuchFileException("This file doesn't exist or it's a directory.");
     }
-    //this.parseJson();
+    this.parseJson();
   }
 
-  /*public void parseJson()
+  public void parseJson()
   {
-    JSONParser parser = parser.parse(new FileReader(this.fileName));
-  }*/
+    JSONParser parser = new JSONParser();
+
+    try
+    {
+      Object obj = parser.parse(new FileReader(this.fileName));
+      this.jsonObject = (JSONObject)obj;
+      System.out.println(jsonObject);
+    }
+    catch (FileNotFoundException err)
+    {
+      System.out.println(err.getMessage());
+    }
+    catch (IOException err)
+    {
+      System.out.println(err.getMessage());
+    }
+    catch (ParseException err)
+    {
+      System.out.println(err.getMessage());
+    }
+  }
 }
