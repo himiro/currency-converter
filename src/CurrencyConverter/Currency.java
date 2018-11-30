@@ -1,9 +1,9 @@
 class Currency
 {
   protected String name;
-  protected double rate;
+  protected Object rate;
 
-  Currency(String name, double rate)
+  Currency(String name, Object rate)
   {
     this.name = name;
     this.rate = rate;
@@ -19,12 +19,12 @@ class Currency
     return this.name;
   }
 
-  public void setRate(double rate)
+  public void setRate(Object rate)
   {
     this.rate = rate;
   }
 
-  public double getRate()
+  public Object getRate()
   {
     return this.rate;
   }

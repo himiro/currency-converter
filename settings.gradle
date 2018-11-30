@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'currency-converter-1.0.0.jar'
+rootProject.name = 'currency-converter-1.0.0'
