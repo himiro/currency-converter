@@ -48,8 +48,7 @@ class Converter
   {
     //Conversion from $ to £
     // Or conversion € -> £ = € -> $ -> £
-    System.out.println(this.source.getRate());
-    System.out.println(this.dest.getRate());
-    return (this.nb.divide(this.source.getRate().multiply((BigDecimal)this.dest.getRate()), 5, RoundingMode.HALF_UP));
+    BigDecimal tmp = this.nb.divide(this.source.getRate(), 5, RoundingMode.HALF_UP);
+    return (tmp.multiply((BigDecimal)this.dest.getRate()).setScale(5, RoundingMode.HALF_UP));
   }
 }

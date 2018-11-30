@@ -174,9 +174,7 @@ class Window extends JFrame implements ActionListener
         }
         this.converteur = new Converter(dnb, src, dest);
         dnb = this.converteur.convert();
-        System.out.println(dnb);
         snb = String.valueOf(dnb);
-        System.out.println(snb);
         this.label.setText(snb);
         break;
         default:
