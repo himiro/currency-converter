@@ -67,10 +67,9 @@ class Parser
     {
       throw new NoSuchFileException("This file doesn't exist or it's a directory.");
     }
-    this.parseJson();
   }
 
-  public void parseJson()
+  public List<Currency> parseJson()
   {
     JSONParser parser = new JSONParser();
 
@@ -81,16 +80,12 @@ class Parser
 
       this.jsonObject = (JSONObject)obj;
       this.jsonObject = (JSONObject)this.jsonObject.get("quotes");
-      for (Object key : jsonObject.keySet()) {
+      for (Object key : jsonObject.keySet())
+      {
         String keyStr = (String)key;
         Object keyvalue = jsonObject.get(keyStr);
 
         this.rates.add(new Currency(keyStr, keyvalue));
-        System.out.println("key: "+ keyStr + " value: " + keyvalue);
-      }
-      for (int i = 0; i < this.rates.size(); i++)
-      {
-        System.out.println(this.rates.get(i).getName() + " / " + this.rates.get(i).getRate());
       }
     }
     catch (FileNotFoundException err)
@@ -105,5 +100,7 @@ class Parser
     {
       System.out.println(err.getMessage());
     }
+    
+    return (this.rates);
   }
 }

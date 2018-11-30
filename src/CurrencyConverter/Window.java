@@ -19,14 +19,16 @@ class Window extends JFrame implements ActionListener
   protected Button[] buttons = new Button[13];
   protected Button conv;
   protected ComboBox money1, money2;
+  protected List<Currency> listCurrency;
 
-  Window(String title, int height, int width)
+  Window(String title, int height, int width, List<Currency> listCurrency)
   {
     this.title = title;
     this.height = height;
     this.width = width;
     this.frame = new JFrame();
     this.label = new JLabel("0");
+    this.listCurrency = listCurrency;
     this.createWindow();
     this.displayButton();
   }
@@ -120,7 +122,7 @@ class Window extends JFrame implements ActionListener
       this.label.setText("0");
       break;
       case "Convert":
-      
+
       break;
       default:
       if (this.label.getText() != "0" || value == ".")
