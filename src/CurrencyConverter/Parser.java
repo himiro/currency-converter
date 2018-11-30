@@ -1,16 +1,19 @@
 import java.util.*;
 import java.io.*;
+import java.math.BigDecimal;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 class Parser
 {
   //LiveRates liveRates;
-  protected List<Currency> rates = new ArrayList<>();
+  protected List<Currency> rates = new ArrayList<Currency>();
   protected String fileName;
   protected JSONObject jsonObject;
+  protected JSONArray jsonArray;
 
   Parser()
   {
@@ -73,9 +76,22 @@ class Parser
 
     try
     {
-      Object obj = parser.parse(new FileReader(this.fileName));
+      FileReader rd = new FileReader(this.fileName);
+      Object obj = parser.parse(rd);
+
       this.jsonObject = (JSONObject)obj;
-      System.out.println(jsonObject);
+      this.jsonObject = (JSONObject)this.jsonObject.get("quotes");
+      for (Object key : jsonObject.keySet()) {
+        String keyStr = (String)key;
+        Object keyvalue = jsonObject.get(keyStr);
+
+        this.rates.add(new Currency(keyStr, keyvalue));
+        System.out.println("key: "+ keyStr + " value: " + keyvalue);
+      }
+      for (int i = 0; i < this.rates.size(); i++)
+      {
+        System.out.println(this.rates.get(i).getName() + " / " + this.rates.get(i).getRate());
+      }
     }
     catch (FileNotFoundException err)
     {
