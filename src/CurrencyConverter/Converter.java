@@ -46,7 +46,7 @@ class Converter
     // Basic conversion like 100$ to ?€
     if (this.source.getName().equals("USD"))
     {
-      return (this.nb * this.dest.getRate());
+      return (this.nb * (Double)this.dest.getRate());
     }
     else if (this.dest.getName().equals("USD"))
     {
@@ -56,7 +56,7 @@ class Converter
     // Or conversion € -> £ = € -> $ -> £
     else
     {
-      return (this.nb / this.source.getRate() * this.dest.getRate());
+      return (this.nb / (Double)this.source.getRate() * (Double)this.dest.getRate());
     }
   }
 }
