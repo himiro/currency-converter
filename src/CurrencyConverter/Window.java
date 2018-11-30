@@ -29,6 +29,7 @@ class Window extends JFrame implements ActionListener
     this.label = new JLabel("0");
     this.createWindow();
     this.displayButton();
+    this.displaySelector();
   }
 
   public void setTitle(String title)
@@ -106,13 +107,14 @@ class Window extends JFrame implements ActionListener
       this.buttonPanel.add(this.buttons[i].getButton());
     }
     this.frame.add(buttonPanel, BorderLayout.CENTER);
-    displaySelector();
   }
 
   public void actionPerformed(ActionEvent e)
   {
     String value = e.getActionCommand();
-
+    String snb, ssrc, sdest;
+    double dnb;
+    Currency src, dest;
 
     switch(value)
     {
@@ -120,7 +122,16 @@ class Window extends JFrame implements ActionListener
       this.label.setText("0");
       break;
       case "Convert":
-      
+        snb = this.label.getText();
+        dnb = Double.parseDouble(snb);
+        ssrc = (String)money1.getSelectedItem();
+        sdest = (String)money2.getSelectedItem();
+        for (int i = 0; i < ListCurrency.size; i++) {
+            if (ssrc == ListCurrency[i].getName())
+                src = ListCurrency[i];
+            else if (sdest == ListCurrency[i].getName())
+                dest = sdest ListCurrency[i];
+        }
       break;
       default:
       if (this.label.getText() != "0" || value == ".")
