@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.*;
 import java.math.BigDecimal;
+import javax.swing.JComboBox;
+
 
 class Window extends JFrame implements ActionListener
 {
@@ -19,9 +21,10 @@ class Window extends JFrame implements ActionListener
   protected JLabel label;
   protected Button[] buttons = new Button[13];
   protected Button conv;
-  protected ComboBox money1, money2;
+  protected JComboBox money1, money2;
   protected List<Currency> listCurrency;
   protected Converter converteur;
+  protected String name1, name2;
 
   Window(String title, int height, int width, List<Currency> listCurrency)
   {
@@ -77,22 +80,36 @@ class Window extends JFrame implements ActionListener
 
   public void displaySelector()
   {
-    String[] moneyList = {"USD", "USDAED", "USDAFN"};
+    String[] moneyList = new String[listCurrency.size()];
+    String temp;
+
+    this.money1 = new JComboBox();
+    this.money2 = new JComboBox();
+    for (int i = 0; i < listCurrency.size(); i++) {
+      temp = listCurrency.get(i).getName();
+      if (temp.compareTo("USD") != 0)
+      {
+        temp = temp.substring(3);
+      }
+      this.money1.addItem(temp);
+      this.money1.setSelectedItem(temp);
+      this.money2.addItem(temp);
+      this.money2.setSelectedItem(temp);
+      moneyList[i] = temp;
+    }
 
     this.boxPanel = new JPanel();
     this.boxPanel.setLayout(new GridLayout(1,3));
 
-    this.money1 = new ComboBox("currency",1,1, moneyList);
     this.money1.addActionListener(this);
-    this.boxPanel.add(money1.getComboBox());
+    this.boxPanel.add(this.money1);
 
     this.conv = new Button("Convert",1,1);
     this.conv.getButton().addActionListener(this);
     this.boxPanel.add(conv.getButton());
 
-    this.money2 = new ComboBox("currency",1,1, moneyList);
     this.money2.addActionListener(this);
-    this.boxPanel.add(money2.getComboBox());
+    this.boxPanel.add(this.money2);
 
     this.frame.add(boxPanel, BorderLayout.SOUTH);
     this.frame.show();
@@ -125,40 +142,54 @@ class Window extends JFrame implements ActionListener
     Currency src = new Currency();
     Currency dest = new Currency();
 
-    switch(value)
+    if (!e.getSource().getClass().getName().equals("javax.swing.JComboBox"))
     {
-      case "C":
-      this.label.setText("0");
-      break;
-      case "Convert":
-      snb = this.label.getText();
-      dnb = new BigDecimal(snb);
-      ssrc = (String)this.money1.getSelectedItem();
-      sdest = (String)this.money2.getSelectedItem();
-      System.out.println(ssrc + " / " + money2.getSelectedItem());
-      for (int i = 0; i < listCurrency.size(); i++) {
-        if (ssrc == listCurrency.get(i).getName())
-        src = listCurrency.get(i);
-        else if (sdest == listCurrency.get(i).getName())
-        dest = listCurrency.get(i);
-      }
-      this.converteur = new Converter(dnb, src, dest);
-      dnb = this.converteur.convert();
-      System.out.println(dnb);
-      snb = String.valueOf(dnb);
-      this.label.setText(snb);
-      break;
-      default:
-      if (this.label.getText() != "0" || value == ".")
+      switch(value)
       {
-        this.label.setText(this.label.getText() + value);
+        case "C":
+        this.label.setText("0");
+        break;
+        case "Convert":
+        snb = this.label.getText();
+        dnb = new BigDecimal(snb);
+        ssrc = money1.getSelectedItem().toString();
+        if (ssrc.compareTo("USD") != 0)
+        {
+          ssrc = "USD" + ssrc;
+        }
+        sdest = money2.getSelectedItem().toString();
+        if (sdest.compareTo("USD") != 0)
+        {
+          sdest = "USD" + sdest;
+        }
+        for (int i = 0; i < listCurrency.size(); i++) {
+          if (ssrc.equals(listCurrency.get(i).getName()))
+          {
+            src = listCurrency.get(i);
+          }
+          else if (sdest.equals(listCurrency.get(i).getName()))
+          {
+            dest = listCurrency.get(i);
+          }
+        }
+        this.converteur = new Converter(dnb, src, dest);
+        dnb = this.converteur.convert();
+        System.out.println(dnb);
+        snb = String.valueOf(dnb);
+        System.out.println(snb);
+        this.label.setText(snb);
+        break;
+        default:
+        if (this.label.getText() != "0" || value == ".")
+        {
+          this.label.setText(this.label.getText() + value);
+        }
+        else
+        {
+          this.label.setText(value);
+        }
+        break;
       }
-      else
-      {
-        this.label.setText(value);
-      }
-      break;
     }
   }
-
 }

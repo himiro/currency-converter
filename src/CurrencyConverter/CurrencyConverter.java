@@ -14,6 +14,6 @@ class CurrencyConverter
     {
       System.out.println(err.getMessage());
     }
-    Window win = new Window("Calculator", 600, 400, rates);
+    Window win = new Window("Converter", 600, 400, rates);
   }
 }

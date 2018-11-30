@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 class Converter
 {
@@ -45,20 +46,10 @@ class Converter
 
   public BigDecimal convert()
   {
-    // Basic conversion like 100$ to ?€
-    if (this.source.getName().equals("USD"))
-    {
-      return (this.nb.multiply(this.dest.getRate()));
-    }
-    else if (this.dest.getName().equals("USD"))
-    {
-      return ((BigDecimal)this.nb);
-    }
     //Conversion from $ to £
     // Or conversion € -> £ = € -> $ -> £
-    else
-    {
-      return ((BigDecimal)this.nb.divide((BigDecimal)this.source.getRate().multiply((BigDecimal)this.dest.getRate())));
-    }
+    System.out.println(this.source.getRate());
+    System.out.println(this.dest.getRate());
+    return (this.nb.divide(this.source.getRate().multiply((BigDecimal)this.dest.getRate()), 5, RoundingMode.HALF_UP));
   }
 }

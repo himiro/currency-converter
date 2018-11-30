@@ -80,6 +80,7 @@ class Parser
 
       this.jsonObject = (JSONObject)obj;
       this.jsonObject = (JSONObject)this.jsonObject.get("quotes");
+      this.rates.add(new Currency("USD", new BigDecimal("1.0")));
       for (Object key : jsonObject.keySet())
       {
         String keyStr = (String)key;
@@ -107,7 +108,6 @@ class Parser
     {
       System.out.println(err.getMessage());
     }
-
     return (this.rates);
   }
 }
