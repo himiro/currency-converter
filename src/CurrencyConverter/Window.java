@@ -77,7 +77,7 @@ class Window extends JFrame implements ActionListener
 
   public void displaySelector()
   {
-    String[] moneyList = {"USD", "EUR", "POU"};
+    String[] moneyList = {"USD", "USDAED", "USDAFN"};
 
     this.boxPanel = new JPanel();
     this.boxPanel.setLayout(new GridLayout(1,3));
@@ -133,22 +133,19 @@ class Window extends JFrame implements ActionListener
       case "Convert":
       snb = this.label.getText();
       dnb = new BigDecimal(snb);
-      ssrc = (String)money1.getSelectedItem();
-      sdest = (String)money2.getSelectedItem();
+      ssrc = (String)this.money1.getSelectedItem();
+      sdest = (String)this.money2.getSelectedItem();
+      System.out.println(ssrc + " / " + money2.getSelectedItem());
       for (int i = 0; i < listCurrency.size(); i++) {
         if (ssrc == listCurrency.get(i).getName())
         src = listCurrency.get(i);
         else if (sdest == listCurrency.get(i).getName())
         dest = listCurrency.get(i);
       }
-      System.out.println(dnb.getClass().getName());
-      System.out.println(src.getClass().getName());
-      System.out.println(dest.getClass().getName());
       this.converteur = new Converter(dnb, src, dest);
       dnb = this.converteur.convert();
       System.out.println(dnb);
       snb = String.valueOf(dnb);
-      System.out.println(snb);
       this.label.setText(snb);
       break;
       default:
