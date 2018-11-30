@@ -20,6 +20,7 @@ class Window extends JFrame implements ActionListener
   protected Button conv;
   protected ComboBox money1, money2;
   protected List<Currency> listCurrency;
+  protected Converter converteur;
 
   Window(String title, int height, int width, List<Currency> listCurrency)
   {
@@ -31,6 +32,7 @@ class Window extends JFrame implements ActionListener
     this.listCurrency = listCurrency;
     this.createWindow();
     this.displayButton();
+    this.displaySelector();
   }
 
   public void setTitle(String title)
@@ -117,13 +119,15 @@ class Window extends JFrame implements ActionListener
       this.buttonPanel.add(this.buttons[i].getButton());
     }
     this.frame.add(buttonPanel, BorderLayout.CENTER);
-    displaySelector();
   }
 
   public void actionPerformed(ActionEvent e)
   {
     String value = e.getActionCommand();
-
+    String snb, ssrc, sdest;
+    Double dnb;
+    Currency src = new Currency();
+    Currency dest = new Currency();
 
     switch(value)
     {
@@ -131,7 +135,25 @@ class Window extends JFrame implements ActionListener
       this.label.setText("0");
       break;
       case "Convert":
-
+        snb = this.label.getText();
+        dnb = Double.parseDouble(snb);
+        ssrc = (String)money1.getSelectedItem();
+        sdest = (String)money2.getSelectedItem();
+        for (int i = 0; i < listCurrency.size(); i++) {
+            if (ssrc == listCurrency.get(i).getName())
+                src = listCurrency.get(i);
+            else if (sdest == listCurrency.get(i).getName())
+                dest = listCurrency.get(i);
+        }
+        System.out.println(dnb.getClass().getName());
+        System.out.println(src.getClass().getName());
+        System.out.println(dest.getClass().getName());
+      this.converteur = new Converter(dnb, src, dest);
+      dnb = this.converteur.convert();
+      System.out.println(dnb);
+      snb = String.valueOf(dnb);
+       System.out.println(snb);
+      this.label.setText(snb);
       break;
       default:
       if (this.label.getText() != "0" || value == ".")
