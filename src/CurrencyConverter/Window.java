@@ -74,29 +74,38 @@ class Window extends JFrame implements ActionListener
 
   public void displaySelector()
   {
-      String[] moneyList = {"USD", "EUR", "POU"};
+    //String[] moneyList = {"USD", "EUR", "POU"};
+    ArrayList<String> moneyList = new ArrayList<String>();
 
-      this.boxPanel = new JPanel();
-      this.boxPanel.setLayout(new GridLayout(1,3));
-      this.money1 = new ComboBox("currency",1,1, moneyList);
-      this.money1.addActionListener(this);
-      this.boxPanel.add(money1.getComboBox());
-      this.conv = new Button("Convert",1,1);
-      this.conv.getButton().addActionListener(this);
-      this.boxPanel.add(conv.getButton());
-      this.money2 = new ComboBox("currency",1,1, moneyList);
-      this.money2.addActionListener(this);
-      this.boxPanel.add(money2.getComboBox());
-      this.frame.add(boxPanel, BorderLayout.SOUTH);
-      this.frame.show();
+    for (int i = 0; i < this.listCurrency.size(); i++)
+    {
+        moneyList.add(this.listCurrency.get(i).getName());
+    }
+    this.boxPanel = new JPanel();
+    this.boxPanel.setLayout(new GridLayout(1,3));
+
+    this.money1 = new ComboBox("currency",1,1, moneyList);
+    this.money1.addActionListener(this);
+    this.boxPanel.add(money1.getComboBox());
+
+    this.conv = new Button("Convert",1,1);
+    this.conv.getButton().addActionListener(this);
+    this.boxPanel.add(conv.getButton());
+
+    this.money2 = new ComboBox("currency",1,1, moneyList);
+    this.money2.addActionListener(this);
+    this.boxPanel.add(money2.getComboBox());
+
+    this.frame.add(boxPanel, BorderLayout.SOUTH);
+    this.frame.show();
   }
 
   public void displayButton()
   {
-      String[] buttonName = {"7", "8", "9",
-      "4", "5", "6",
-      "1", "2", "3",
-      "C", "0", "."};
+    String[] buttonName = {"7", "8", "9",
+    "4", "5", "6",
+    "1", "2", "3",
+    "C", "0", "."};
 
     this.label.setHorizontalAlignment(JLabel.RIGHT);
     this.frame.add(this.label, BorderLayout.NORTH);
