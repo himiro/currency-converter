@@ -1,13 +1,13 @@
 import java.util.*;
 import java.io.File;
-//import org.json.*;
+import org.json.simple.*;
 
 class Parser
 {
   //LiveRates liveRates;
   protected List<Currency> rates = new ArrayList<>();
   protected String fileName;
-  //protected JSONObject jsonObject;
+  protected JSONObject jsonObject;
 
   Parser()
   {

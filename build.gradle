@@ -34,6 +34,14 @@ apply plugin: 'maven'
 
 sourceSets.main.java.srcDirs = ['src']
 
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+}
+
 jar {
     manifest {
         attributes(
@@ -41,10 +49,6 @@ jar {
             )
         }
     }
-
-/*dependencies{
-    compile 'com.googlecode.json-simple:json-simple:1.1.1'
-}*/
 
     /*task run(dependsOn:JavaExec) << {
         javaexec
