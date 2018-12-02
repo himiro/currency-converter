@@ -46,8 +46,6 @@ class Converter
 
   public BigDecimal convert()
   {
-    //Conversion from $ to £
-    // Or conversion € -> £ = € -> $ -> £
     BigDecimal tmp = this.nb.divide(this.source.getRate(), 5, RoundingMode.HALF_UP);
     return (tmp.multiply((BigDecimal)this.dest.getRate()).setScale(5, RoundingMode.HALF_UP));
   }

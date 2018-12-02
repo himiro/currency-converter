@@ -43,6 +43,8 @@ repositories {
 
 dependencies {
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.1'
+    compile group: 'org.json', name: 'json', version: '20090211'
 }
 
 jar {

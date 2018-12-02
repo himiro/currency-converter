@@ -6,6 +6,7 @@ class CurrencyConverter
   {
     List<Currency> rates = new ArrayList<>();
     Parser parser = new Parser();
+
     try{
       parser.openFile();
       rates = parser.parseJson();

@@ -9,24 +9,24 @@ import org.json.simple.parser.ParseException;
 
 class Parser
 {
-  //LiveRates liveRates;
   protected List<Currency> rates = new ArrayList<Currency>();
   protected String fileName;
   protected JSONObject jsonObject;
   protected JSONArray jsonArray;
+  protected LiveRates liveRates;
 
   Parser()
   {
     this.fileName = "./rates.json";
     this.jsonObject = new JSONObject();
-    //liveRates = new LiveRates();
+    this.liveRates = new LiveRates();
   }
 
   Parser(String fileName)
   {
     this.fileName = fileName;
     this.jsonObject = new JSONObject();
-    //liveRates = new LiveRates();
+    this.liveRates = new LiveRates();
   }
 
   public void setRates(List<Currency> rates)
@@ -75,6 +75,7 @@ class Parser
 
     try
     {
+      liveRates.getLiveRates();
       FileReader rd = new FileReader(this.fileName);
       Object obj = parser.parse(rd);
 
