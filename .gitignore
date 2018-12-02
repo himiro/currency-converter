@@ -2,6 +2,6 @@
 *~
 *.idea
 Example*
-build/
-dist/
-.gradle/
+build/*
+dist/*
+.gradle/*

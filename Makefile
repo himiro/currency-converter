@@ -1,6 +1,6 @@
 NAME	=		dist/currency-converter-1.0.0.jar
 
-GRADLE=		gradle -i
+GRADLE=		gradle
 
 RM		=		rm -f
 
